@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Drum Kit</title>
+	<style>
+		.indicator {
+			border: 1px solid black;
+			display: inline-block;
+			padding: 0 20px;
+			text-align: center;
+		}
+		.playing {
+			border: 2px solid red;
+		}
+	}
+	</style>
+	<script>
+	window.onkeydown = function(e) {
+		var key = e.keyCode ? e.keyCode : e.which;
+		const btnPressed = document.querySelector('[data-key="'+ key +'"]');
+	   if (btnPressed) {
+			btnPressed.classList.add('playing');
+			
+	   }
+	}
+	window.onkeyup = function(e) {
+		var key = e.keyCode ? e.keyCode : e.which;
+		const btnPressed = document.querySelector('[data-key="'+ key +'"]');
+	   if (btnPressed) {
+			btnPressed.classList.remove('playing');
+	   }
+	}
+	</script>
+</head>
+<body>
+	<div class="indicator" data-key ="65">
+		<h1 class="letter">A</h1>
+		<p class="sound">CLAP</p>
+	</div>
+	<div class="indicator" data-key ="83">
+		<h1 class="letter">S</h1>
+		<p class="sound">HIHAT</p>
+	</div>
+	<div class="indicator" data-key ="68">
+		<h1 class="letter">D</h1>
+		<p class="sound">KICK</p>
+	</div>
+	<div class="indicator" data-key ="70">
+		<h1 class="letter">F</h1>
+		<p class="sound">OPENHAT</p>
+	</div>
+	<div class="indicator" data-key ="71">
+		<h1 class="letter">G</h1>
+		<p class="sound">BOOM</p>
+	</div>
+	<div class="indicator" data-key ="72">
+		<h1 class="letter">H</h1>
+		<p class="sound">RIDE</p>
+	</div>
+	<div class="indicator" data-key ="74">
+		<h1 class="letter">J</h1>
+		<p class="sound">SNARE</p>
+	</div>
+	<div class="indicator" data-key ="75">
+		<h1 class="letter">K</h1>
+		<p class="sound">TOM</p>
+	</div>
+	<div class="indicator" data-key ="76">
+		<h1 class="letter">L</h1>
+		<p class="sound">TINK</p>
+	</div>
+
+	<audio data-key="65" src="sounds/clap.wav"></audio>
+	<audio data-key="83" src="sounds/hihat.wav"></audio>
+	<audio data-key="68" src="sounds/kick.wav"></audio>
+	<audio data-key="70" src="sounds/openhat.wav"></audio>
+	<audio data-key="71" src="sounds/boom.wav"></audio>
+	<audio data-key="72" src="sounds/ride.wav"></audio>
+	<audio data-key="74" src="sounds/snare.wav"></audio>
+	<audio data-key="75" src="sounds/tom.wav"></audio>
+	<audio data-key="76" src="sounds/tink.wav"></audio>
+</body>
+</html>
