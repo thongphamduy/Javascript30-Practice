@@ -3,73 +3,88 @@
 <head>
 	<title>Drum Kit</title>
 	<style>
+	body {
+		background-image: url("https://wallpaperscraft.com/image/dark_background_line_surface_65896_1920x1200.jpg");
+	}
+		.container {
+			position: absolute;
+   			left: 50%;
+   			top:50%;
+   			transform: translate(-50%,-50%);
+		}
 		.indicator {
-			border: 1px solid black;
+			color: white;
+			font-size: 14px;
+			width: 60px;
+			border: 3px solid gray;
 			display: inline-block;
-			padding: 0 20px;
+			padding: 0 10px;
 			text-align: center;
+
 		}
 		.playing {
-			border: 2px solid red;
+			border: 3px solid red;
 		}
 	}
 	</style>
 	<script>
 	window.onkeydown = function(e) {
 		var key = e.keyCode ? e.keyCode : e.which;
-		const btnPressed = document.querySelector('[data-key="'+ key +'"]');
-	   if (btnPressed) {
-			btnPressed.classList.add('playing');
-			
+		const btnPressed = document.querySelectorAll('[data-key="'+ key +'"]');
+		console.log(btnPressed);
+	   if (btnPressed[0]) {
+			btnPressed[0].classList.add('playing');
+			btnPressed[1].play();
 	   }
 	}
 	window.onkeyup = function(e) {
 		var key = e.keyCode ? e.keyCode : e.which;
-		const btnPressed = document.querySelector('[data-key="'+ key +'"]');
-	   if (btnPressed) {
-			btnPressed.classList.remove('playing');
+		const btnPressed = document.querySelectorAll('[data-key="'+ key +'"]');
+	   if (btnPressed[0]) {
+			btnPressed[0].classList.remove('playing');
 	   }
 	}
 	</script>
 </head>
 <body>
-	<div class="indicator" data-key ="65">
-		<h1 class="letter">A</h1>
-		<p class="sound">CLAP</p>
+	<div class="container">
+		<div class="indicator" data-key ="65">
+			<h1 class="letter">A</h1>
+			<p class="sound">CLAP</p>
+		</div>
+		<div class="indicator" data-key ="83">
+			<h1 class="letter">S</h1>
+			<p class="sound">HIHAT</p>
+		</div>
+		<div class="indicator" data-key ="68">
+			<h1 class="letter">D</h1>
+			<p class="sound">KICK</p>
+		</div>
+		<div class="indicator" data-key ="70">
+			<h1 class="letter">F</h1>
+			<p class="sound">OPENHAT</p>
+		</div>
+		<div class="indicator" data-key ="71">
+			<h1 class="letter">G</h1>
+			<p class="sound">BOOM</p>
+		</div>
+		<div class="indicator" data-key ="72">
+			<h1 class="letter">H</h1>
+			<p class="sound">RIDE</p>
+		</div>
+		<div class="indicator" data-key ="74">
+			<h1 class="letter">J</h1>
+			<p class="sound">SNARE</p>
+		</div>
+		<div class="indicator" data-key ="75">
+			<h1 class="letter">K</h1>
+			<p class="sound">TOM</p>
+		</div>
+		<div class="indicator" data-key ="76">
+			<h1 class="letter">L</h1>
+			<p class="sound">TINK</p>
+		</div>
 	</div>
-	<div class="indicator" data-key ="83">
-		<h1 class="letter">S</h1>
-		<p class="sound">HIHAT</p>
-	</div>
-	<div class="indicator" data-key ="68">
-		<h1 class="letter">D</h1>
-		<p class="sound">KICK</p>
-	</div>
-	<div class="indicator" data-key ="70">
-		<h1 class="letter">F</h1>
-		<p class="sound">OPENHAT</p>
-	</div>
-	<div class="indicator" data-key ="71">
-		<h1 class="letter">G</h1>
-		<p class="sound">BOOM</p>
-	</div>
-	<div class="indicator" data-key ="72">
-		<h1 class="letter">H</h1>
-		<p class="sound">RIDE</p>
-	</div>
-	<div class="indicator" data-key ="74">
-		<h1 class="letter">J</h1>
-		<p class="sound">SNARE</p>
-	</div>
-	<div class="indicator" data-key ="75">
-		<h1 class="letter">K</h1>
-		<p class="sound">TOM</p>
-	</div>
-	<div class="indicator" data-key ="76">
-		<h1 class="letter">L</h1>
-		<p class="sound">TINK</p>
-	</div>
-
 	<audio data-key="65" src="sounds/clap.wav"></audio>
 	<audio data-key="83" src="sounds/hihat.wav"></audio>
 	<audio data-key="68" src="sounds/kick.wav"></audio>
