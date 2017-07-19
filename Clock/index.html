@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Clock</title>
+	<style>
+		body {
+			background-image: url("http://www.desktopwallpaperhd.net/wallpapers/20/6/landscape-images-grey-background-desctopwalls-search-205350.jpg");
+		}
+		.clock-face {
+			width: 200px;
+			height: 200px;
+			border: 10px solid grey;
+			border-radius: 50%;
+			position: relative;
+			padding: 10px;
+			background: url("https://cssanimation.rocks/images/posts/clocks/ios_clock.svg") no-repeat center;
+			background-size: 88%;
+			margin: 300px 300px;
+
+		}
+		.hours {
+			height: 20%;
+			background-color: black;
+			position: absolute;
+			width: 2.5%;
+			left: 50%;
+			top: 30%;
+			transform-origin: 50% 100%;
+		}
+		.minutes {
+			height: 30%;
+			background-color: black;
+			position: absolute;
+			width: 2%;
+			left: 50%;
+			top: 20%;
+			transform-origin: 50% 100%;
+		}
+		.seconds {
+			height: 40%;
+			background-color: black;
+			position: absolute;
+			width: 1.5%;
+			left: 50%;
+			top: 10%;
+			transform-origin: 50% 100%;
+		}
+	</style>
+
+</head>
+<body>
+<div class="clock-face">
+	<div class="hours"></div>
+	<div class="minutes"></div>
+	<div class="seconds"></div>
+</div>
+<script>
+		var secondHand = document.getElementsByClassName('seconds');
+		var minuteHand = document.getElementsByClassName('minutes');
+		var hourHand = document.getElementsByClassName('hours');
+
+		function setDate () {
+			const now = new Date ();
+			const seconds = now.getSeconds();
+			//console.log(seconds);
+			const minutes = now.getMinutes();
+			//console.log(minutes);
+			const hours = now.getHours();
+			//console.log(hours);
+			//console.log(seconds);
+			secondHand[0].style.transform="rotate(" + (6 * seconds) + "deg)";
+			minuteHand[0].style.transform="rotate(" + (6 * minutes) + "deg)";
+			hourHand[0].style.transform="rotate(" + (15 * hours) + "deg)";
+		}
+		
+		// get hours/minutes/seconds per seconds
+		setInterval(setDate, 1000);
+
+	</script>
+</body>
+</html>
