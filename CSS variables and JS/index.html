@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>CSS JS variables</title>
+	<style>
+		body {
+			background-color: #286060;
+			color: white;
+		}
+		h2 {
+			font-size: 60px;
+			text-align: center;
+		}
+
+		#modifier {
+			display: inline-block;
+			position: relative;
+			left: 50%;
+		}
+		#modifier h3, div{
+			display: inline-block;
+		}
+		img {
+			border: 3px solid;
+		}
+	</style>
+</head>
+<body>
+<h2>Update the CSS variable using <span id="js">JS</span></h2>
+<div id="modifier">
+	<h3>Spacing:</h3>
+	<input type="range" id="spacing" min="0" max="100" step="10" value="0">
+	<h3>Blur:</h3>
+	<input type="range" id="blur" min="0" max="10" step="1" value="0">
+	<h3>Base Color:</h3>
+	<input type="color" id="baseColor" value="#ffee00">
+</div>
+<div>
+	<img src="https://images-na.ssl-images-amazon.com/images/I/51VC7yje4IL.jpg" id="img">
+</div>
+
+<script>
+	var blurImg = document.getElementById("blur");
+	var spacing = document.getElementById("spacing");
+	var baseColor = document.getElementById("baseColor");
+	var img = document.getElementById("img");
+	var js = document.getElementById("js");
+	blurImg.addEventListener ("change", function (){
+		console.log("blur changed to " + blurImg.value);
+		img.style.filter = "blur(" + blurImg.value + "px)";
+	});
+	spacing.addEventListener("change", function () {
+		console.log("spacing " + spacing.value);
+		img.style.padding = "" + spacing.value + "px";
+	});	
+	baseColor.addEventListener("change", function () {
+		img.style.backgroundColor = baseColor.value;
+		img.style.borderColor = baseColor.value;
+		js.style.color = baseColor.value;
+	});
+</script>
+</body>
+</html>
