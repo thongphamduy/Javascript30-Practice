@@ -11,34 +11,39 @@
 			font-size: 60px;
 			text-align: center;
 		}
-
-		#modifier {
-			display: inline-block;
-			position: relative;
+		#container {
+			display: block;
+			position: absolute;
 			left: 50%;
+			text-align: center;
+			transform: translateX(-50%);
+		}
+		#modifier {
+
 		}
 		#modifier h3, div{
 			display: inline-block;
 		}
 		img {
 			border: 3px solid;
-		}
+			}
 	</style>
 </head>
 <body>
-<h2>Update the CSS variable using <span id="js">JS</span></h2>
-<div id="modifier">
+	<h2>Update the CSS variable using <span id="js">JS</span></h2>
+<div id="container">
+	<div id="modifier">
 	<h3>Spacing:</h3>
 	<input type="range" id="spacing" min="0" max="100" step="10" value="0">
 	<h3>Blur:</h3>
 	<input type="range" id="blur" min="0" max="10" step="1" value="0">
 	<h3>Base Color:</h3>
 	<input type="color" id="baseColor" value="#ffee00">
-</div>
-<div>
-	<img src="https://images-na.ssl-images-amazon.com/images/I/51VC7yje4IL.jpg" id="img">
-</div>
-
+	</div>
+	<div>
+		<img src="https://images-na.ssl-images-amazon.com/images/I/51VC7yje4IL.jpg" id="img">
+	</div>
+</div>	
 <script>
 	var blurImg = document.getElementById("blur");
 	var spacing = document.getElementById("spacing");
@@ -54,6 +59,11 @@
 		img.style.padding = "" + spacing.value + "px";
 	});	
 	baseColor.addEventListener("change", function () {
+		img.style.backgroundColor = baseColor.value;
+		img.style.borderColor = baseColor.value;
+		js.style.color = baseColor.value;
+	});
+	window.addEventListener("load", function () {
 		img.style.backgroundColor = baseColor.value;
 		img.style.borderColor = baseColor.value;
 		js.style.color = baseColor.value;
