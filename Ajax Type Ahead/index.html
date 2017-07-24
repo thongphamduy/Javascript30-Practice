@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Ajax Type Ahead</title>
+</head>
+<body>
+<input type="text" id="search" placeholder="city or state">
+<div id="result"></div>
+<script>
+	let text = document.getElementById("search");
+	let cities = [];
+
+	const citiesList = "https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json";
+
+	fetch(citiesList).then(function(response){
+		return response.json();
+	}).then(function(data){
+		cities=data;
+		console.log(cities);
+	});
+
+	
+	
+	function findCityName(text) {
+		if(text.city != undefined) 
+			return text.city;
+	}
+
+	function findCities(){
+		let found = cities.filter(findCityName);
+		console.log(found);
+	}
+
+	text.addEventListener("change", findCities());
+	text.addEventListener("keyup", findCities());
+</script>
+</body>
+</html>
