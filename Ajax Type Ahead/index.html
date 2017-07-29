@@ -2,14 +2,34 @@
 <html>
 <head>
 	<title>Ajax Type Ahead</title>
+	<style>
+		.containter {
+			position: absolute;
+			width: 50%;
+			left: 50%;
+			top: 10%;
+			transform: translate(-50%,0%);
+			text-align: center;
+		}
+		#search {
+			padding: 7px;
+		}
+		#result {
+			
+		}
+	</style>
 </head>
 <body>
-<input type="text" id="search" placeholder="city or state">
-<div id="result"></div>
+	<div class="containter">
+		<input type="search" id="search" placeholder="city or state">
+		<div id="result"></div>
+	</div>
 <script>
 	let text = document.getElementById("search");
 	let result = document.getElementById("result");
+	let cityItem = document.getElementsByClassName("cityItem");
 	let cities = [];
+	let foundMatch = [];
 
 	const citiesList = "https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json";
 
@@ -20,21 +40,37 @@
 		console.log(cities);
 	});
 
-		function findCities() {
-		console.log(text.value);
-		let input = text.value.toLowerCase();
-		let queryResult = cities.filter(function(el) {
-			if(el.city.toLowerCase().match(input)) {
+		function findMatch() {
+			clearOldSearch(result);
+			console.log("foundmatch = " + foundMatch);
+			let input = text.value.toLowerCase();
+			let queryResult = cities.filter(function(el) {
+				let x = el.city.toLowerCase();
+				if(x.match(input)) {
+					foundMatch.push(el);
+				}
+			});
+			console.log(foundMatch);
+			displayMatch(foundMatch);
+			return true;
+		}
+		function displayMatch(arr){
+			arr.forEach(el => {
+				console.log(el);
 				let innerDiv = document.createElement('div');
+				innerDiv.className = "cityItem";
 				result.appendChild(innerDiv);
 				innerDiv.innerHTML = el.city + " " + el.population;
-				return true;
+			});
+		}
+		function clearOldSearch (node) {
+			foundMatch = [];
+			while(node.hasChildNodes()){
+				node.removeChild(result.lastChild);
 			}
-		});
-	}
-	text.addEventListener("change", findCities);
-	// text.addEventListener("keyup", findCities);
-	//text.addEventListener("keyup", testLog);
+			return foundMatch;
+		}
+	text.addEventListener("keyup", findMatch);
 </script>
 </body>
 </html>
