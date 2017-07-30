@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>MultipleCheckBox</title>
+	<style>
+		ul {
+			display: inline-block;
+			list-style-type: none;
+			cursor: pointer;
+		}
+		.checked {
+			background-color: grey;
+		}
+	</style>
+</head>
+<body>
+	<ul class="container">
+		<li class = "options">item 1</li>
+		<li class = "options">item 2</li>
+		<li class = "options">item 3</li>
+		<li class = "options">item 4</li>
+		<li class = "options">item 5</li>
+		<li class = "options">item 6</li>
+	</ul>
+
+	<script>
+		let options = document.getElementsByClassName("options");
+		const shiftKeyCode = 16;
+		console.log(options);
+		let lastChecked;
+
+		// function selectItem() {
+		// 	if(hasClass(this, "checked")) {
+		// 		this.classList.remove("checked");
+		// 	}
+		// 	else {					
+		// 		this.classList.add("checked");
+		// 	}
+		// }
+
+		function selectItem() {
+			holdShiftHandling(this);
+			if(hasClass(this, "checked")) {
+				this.classList.remove("checked");
+			}
+			else {					
+				this.classList.add("checked");
+			}
+		}			
+
+		//check if a element has a class
+		function hasClass(element, className) {
+    		return element.className && new RegExp("(^|\\s)" + className + "(\\s|$)").test(element.className);
+		}
+
+		//check if shift pressed
+		function checkShiftKeyDown (e){
+			let keyCode = e.keyCode;
+			if (keyCode == shiftKeyCode){
+				console.log("shift pressed down");
+				return true;
+			} return false;
+		}
+
+		function checkShiftKeyUp (e){
+			let keyCode = e.keyCode;
+			if (keyCode == shiftKeyCode){
+				console.log("shift pressed up");
+				return true;
+			} return false;
+		}
+
+		function holdShiftHandling (e) {
+			if(checkShiftKeyDown(e) && this.checked) {
+				options.forEach(checkbox => {
+					console.log(checkbox);
+				});
+			}
+			lastChecked = this;
+		}
+
+		document.addEventListener("keydown", checkShiftKeyDown);
+		document.addEventListener("keyup", checkShiftKeyUp);
+		for (let i = 0; i < options.length; i++) {
+			options[i].addEventListener("click", selectItem);
+		}
+		
+	</script>
+</body>
+</html>
