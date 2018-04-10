@@ -3,59 +3,68 @@
 <head>
 	<title>Flex Panels</title>
 	<style>
-	body {
-		margin: 0;
-	}
-	.box1 {background-image: url("http://wallpapercave.com/wp/wp1813194.jpg");}
-	.box2 {background-image: url("http://media1.santabanta.com/full5/Global%20Celebrities(F)/Candice%20Swanepoel/candice-swanepoel-77a.jpg");}
-	.box3 {background-image: url("http://media1.santabanta.com/full5/Global%20Celebrities(F)/Nicole%20Scherzinger/nicole-scherzinger-19a.jpg");}
-	.box4 {background-image: url("http://media1.santabanta.com/full5/Global%20Celebrities(F)/Jennifer%20Lopez/jennifer-lopez-179a.jpg");}
-
-	.container {
-		min-height: 100vh;
-		overflow: hidden;
-		display: flex;
-		align-items: center;
-
-	}
-	.box p {
-		color: white;
-		font-family: "helvetica neue";
-		text-align: center;
-		font-size: 20px;
-		font-weight: 200px;
-		text-transform: uppercase;
-		border: 1px solid black;
-	}
-	.box {
-		width: 25%;
-		background-size: auto 100vh;
-		background-position: center;
-	}
-
+		body {
+			height: 100vh;
+			margin: 0px;
+		}
+		.flex-container {
+			display: flex;
+			flex-direction: row;
+			height: 100%;
+		}
+		.parrent {
+			background-color: green;
+			margin: 5px;
+			flex-grow: 1;
+			text-align: center;
+		}
+		.parrent:hover {
+    	background-color: yellow;
+    	flex-grow: 2;
+		}
+		.par-container {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			flex-direction: column;
+			height: 100%;
+		}
+		.child {
+			flex-grow: 1;
+			display: none;
+			background-color: blue;
+		}
+		.child-middle {
+			flex-grow: 1;
+			background-color: pink;
+		}
+		.parrent:hover .child {
+			display: inline-block;
+		}
 	</style>
 </head>
 <body>
-<div class="container">
-	<div class="box box1">
-		<p>Thong1</p>
-		<p>Pham1</p>
-		<p>Duy1</p>
+<div class="flex-container">
+	<div class="parrent">
+		<div class="par-container">
+			<div class="child">Thong</div>
+			<div class="child-middle">Pham</div>
+			<div class="child">Duy</div>
+		</div>
 	</div>
-	<div class="box box2">
-		<p>Thong2</p>
-		<p>Pham2</p>
-		<p>Duy2</p>
+	<div class="parrent">
+		<div class="par-container">
+			<div class="child">Thong</div>
+			<div class="child-middle">Pham</div>
+			<div class="child">Duy</div>
+		</div>
 	</div>
-	<div class="box box3">
-		<p>Thong3</p>
-		<p>Pham3</p>
-		<p>Duy3</p>
-	</div>
-	<div class="box box4">
-		<p>Thong4</p>
-		<p>Pham4</p>
-		<p>Duy4</p>
+	<div class="parrent">
+		<div class="par-container">
+			<div class="child">Thong</div>
+			<div class="child-middle">Pham</div>
+			<div class="child">Duy</div>
+		</div>
 	</div>
 </div>
 </body>

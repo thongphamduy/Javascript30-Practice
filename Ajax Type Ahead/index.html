@@ -9,13 +9,29 @@
 			left: 50%;
 			top: 10%;
 			transform: translate(-50%,0%);
-			text-align: center;
+			font-size: 18px;
+			font-family: 'Lucida Grande';
 		}
 		#search {
-			padding: 7px;
+			padding: 4px;
+			width: 100%;
+			text-align: center;
+			font-size: 18px;
 		}
-		#result {
-			
+		.cityItem {
+			border-bottom: 1px solid gray;
+			padding: 4px;
+		}
+		.cityItem:hover {
+			background-color: gray;
+		}
+		.city {
+			display: inline-block;
+		}
+		.population {
+			display: inline-block;
+			position: absolute;
+			right: 7px;
 		}
 	</style>
 </head>
@@ -25,52 +41,43 @@
 		<div id="result"></div>
 	</div>
 <script>
-	let text = document.getElementById("search");
-	let result = document.getElementById("result");
-	let cityItem = document.getElementsByClassName("cityItem");
-	let cities = [];
-	let foundMatch = [];
-
 	const citiesList = "https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json";
 
-	fetch(citiesList).then(function(response){
-		return response.json();
-	}).then(function(data){
-		cities=data;
-		console.log(cities);
-	});
+	function findMatch(cities) {
+		let input = document.getElementById("search").value.toLowerCase();
+		return (cities || []).filter(city => 
+			city.city.toLowerCase().match(input));
+	}
 
-		function findMatch() {
-			clearOldSearch(result);
-			console.log("foundmatch = " + foundMatch);
-			let input = text.value.toLowerCase();
-			let queryResult = cities.filter(function(el) {
-				let x = el.city.toLowerCase();
-				if(x.match(input)) {
-					foundMatch.push(el);
-				}
+	function displayMatch(arr){
+		let result = document.getElementById("result");
+		clearOldSearch(result);
+		arr.forEach(el => {
+			let innerDiv = document.createElement('div');
+			innerDiv.className = "cityItem";
+			result.appendChild(innerDiv);
+			innerDiv.innerHTML = `<div class="city">${el.city}</div> <div class="population">${el.population}</div>`;
+		});
+	}
+
+	function clearOldSearch (node) {
+		while(node.hasChildNodes()){
+			node.removeChild(result.lastChild);
+		}
+	}
+
+	function findAndDisplayMatchedCities (){
+		fetch(citiesList)
+			.then(function(response){
+				return response.json();
+			})
+			.then(function(data){
+				displayMatch(findMatch(data));
 			});
-			console.log(foundMatch);
-			displayMatch(foundMatch);
-			return true;
 		}
-		function displayMatch(arr){
-			arr.forEach(el => {
-				console.log(el);
-				let innerDiv = document.createElement('div');
-				innerDiv.className = "cityItem";
-				result.appendChild(innerDiv);
-				innerDiv.innerHTML = el.city + " " + el.population;
-			});
-		}
-		function clearOldSearch (node) {
-			foundMatch = [];
-			while(node.hasChildNodes()){
-				node.removeChild(result.lastChild);
-			}
-			return foundMatch;
-		}
-	text.addEventListener("keyup", findMatch);
+
+	document.getElementById("search").addEventListener("keyup", findAndDisplayMatchedCities);
+
 </script>
 </body>
 </html>
